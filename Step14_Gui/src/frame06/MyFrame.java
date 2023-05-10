@@ -63,7 +63,7 @@ public class MyFrame extends JFrame implements ActionListener{
 	   }else if(which == updateBtn) {
 		   JOptionPane.showMessageDialog(this, "수정합니다.");
 	   }
-   }
+   }		
 }
 
 

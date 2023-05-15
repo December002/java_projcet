@@ -1,4 +1,4 @@
-package frame07;
+	package frame07;
 
 import java.awt.Component;
 import java.awt.FlowLayout;

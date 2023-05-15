@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class MainClass02 {
+public class MainClass06 {
 	public static void main(String[] args) {
-		//member 테이블에 추가할 회원의 정보라고 가정
-		int num=4;
-		String name="주뎅이";
-		String addr="봉천동";	
+		//시퀀스(member_seq)를 이용하여 회원정보 추가
+		String name="원숭이";
+		String addr="상도동";	
 		
 		//DB 연결객체를 담을 지역 변수 만들기
 	      Connection conn=null;
@@ -33,13 +32,12 @@ public class MainClass02 {
 	    	  //실행할 미완성의 sql 문
 	    	  String sql="INSERT INTO member"
 	    			  + " (num, name, addr)"
-	    			  +" VALUES(?, ?, ?)";
+	    			  +" VALUES(member_seq.nextval, ?, ?)";
 	    	  //미완성의 sql 문을 전달하면서 preparedStatement 객체의 참조값 얻어내기
 	    	  pstmt=conn.prepareStatement(sql);
 	    	  //prepareStatement 객체의 메소드를 이용해서 미완성인 sql 문을 완성시키기(? 에 값 바인딩하기)
-	    	  pstmt.setInt(1, num);//1번째 ? 에 숫자 바인딩
-	    	  pstmt.setString(2, name);// 2번째 ?에 문자열 바인딩
-	    	  pstmt.setString(3, addr); // 3번째 ?에 문자열 바인딩
+	    	  pstmt.setString(1, name);// 1번째 ?에 문자열 바인딩
+	    	  pstmt.setString(2, addr); // 2번째 ?에 문자열 바인딩
 	    	  //sql 문 실행하기
 	    	  pstmt.executeUpdate();
 	    	  System.out.println("회원의 정보를 저장했습니다.");

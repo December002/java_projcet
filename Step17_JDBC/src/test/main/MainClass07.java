@@ -4,15 +4,28 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class MainClass02 {
+import test.mypac.Member;
+
+public class MainClass07 {
 	public static void main(String[] args) {
-		//member 테이블에 추가할 회원의 정보라고 가정
-		int num=4;
-		String name="주뎅이";
-		String addr="봉천동";	
 		
-		//DB 연결객체를 담을 지역 변수 만들기
-	      Connection conn=null;
+		//추가할 회원의 정보
+		String name="주뎅이";
+		String addr="봉천동";
+		
+		//아래의 메소드를 호출해서 위의 회원 정보가 DB에 저장되도록 프로그래밍 해보세요
+		//위의 정보를 Member 객체에 담아서 insert() 메소드의 매개 변수에 전달한다.
+		Member m=new Member();
+		m.name=name;
+		m.addr=addr;
+		
+		MainClass07.insert(m);
+		
+	}
+	
+	public static void insert(Member mem) {
+		//mem 에 담겨진 정보를 이용해서 회원 한명의 정보를 DB에 저장되도록 해보세요.
+		Connection conn=null;
 	      
 	      try {
 	         //오라클 드라이버 로딩
@@ -26,25 +39,18 @@ public class MainClass02 {
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
-		
-	      //sql 문을 대신 실행해줄 객체의 참조값을 담을 지역변수 미리 만들기
 	      PreparedStatement pstmt=null;
 	      try {
-	    	  //실행할 미완성의 sql 문
-	    	  String sql="INSERT INTO member"
-	    			  + " (num, name, addr)"
-	    			  +" VALUES(?, ?, ?)";
-	    	  //미완성의 sql 문을 전달하면서 preparedStatement 객체의 참조값 얻어내기
+	    	  String sql="insert into member"
+	    			  +" (num, name, addr)"
+	    			  +" values(member_seq.nextval, ?, ?)";
 	    	  pstmt=conn.prepareStatement(sql);
-	    	  //prepareStatement 객체의 메소드를 이용해서 미완성인 sql 문을 완성시키기(? 에 값 바인딩하기)
-	    	  pstmt.setInt(1, num);//1번째 ? 에 숫자 바인딩
-	    	  pstmt.setString(2, name);// 2번째 ?에 문자열 바인딩
-	    	  pstmt.setString(3, addr); // 3번째 ?에 문자열 바인딩
-	    	  //sql 문 실행하기
+	    	  pstmt.setString(1, mem.name);
+	    	  pstmt.setString(2, mem.addr);
 	    	  pstmt.executeUpdate();
-	    	  System.out.println("회원의 정보를 저장했습니다.");
+	    	  System.out.println("정보 변경됨");
 	      }catch(Exception e) {
 	    	  e.printStackTrace();
-	    }  
+	      }
 	}
 }

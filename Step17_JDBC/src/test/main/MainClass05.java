@@ -4,13 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class MainClass02 {
+public class MainClass05 {
 	public static void main(String[] args) {
-		//member 테이블에 추가할 회원의 정보라고 가정
-		int num=4;
-		String name="주뎅이";
-		String addr="봉천동";	
-		
 		//DB 연결객체를 담을 지역 변수 만들기
 	      Connection conn=null;
 	      
@@ -26,25 +21,21 @@ public class MainClass02 {
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
-		
-	      //sql 문을 대신 실행해줄 객체의 참조값을 담을 지역변수 미리 만들기
+	     //4번 회원을 삭제해 보세요
+	      int num=4;
+	      
 	      PreparedStatement pstmt=null;
 	      try {
-	    	  //실행할 미완성의 sql 문
-	    	  String sql="INSERT INTO member"
-	    			  + " (num, name, addr)"
-	    			  +" VALUES(?, ?, ?)";
-	    	  //미완성의 sql 문을 전달하면서 preparedStatement 객체의 참조값 얻어내기
+	    	  String sql="Delete"
+	    			  +" from member"
+	    			  +" Where num=?";
 	    	  pstmt=conn.prepareStatement(sql);
-	    	  //prepareStatement 객체의 메소드를 이용해서 미완성인 sql 문을 완성시키기(? 에 값 바인딩하기)
-	    	  pstmt.setInt(1, num);//1번째 ? 에 숫자 바인딩
-	    	  pstmt.setString(2, name);// 2번째 ?에 문자열 바인딩
-	    	  pstmt.setString(3, addr); // 3번째 ?에 문자열 바인딩
-	    	  //sql 문 실행하기
+	    	  pstmt.setInt(1, num);
 	    	  pstmt.executeUpdate();
-	    	  System.out.println("회원의 정보를 저장했습니다.");
+	    	  System.out.println("회원 정보를 삭제했습니다.");
 	      }catch(Exception e) {
 	    	  e.printStackTrace();
-	    }  
+	      }
+	      
 	}
 }

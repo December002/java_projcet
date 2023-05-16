@@ -29,11 +29,16 @@ public class QuizMain3 extends JFrame {
 	JTextField inputMsg2= new JTextField(10);
 	JTextField inputMsg3= new JTextField(10);
 	JButton saveBtn=new JButton("회원 추가");
+	JButton updateBtn=new JButton("회원 수정");
+	JButton deleteBtn=new JButton("회원 삭제");
+	
 	
 	add(inputMsg1);
 	add(inputMsg2);
 	add(inputMsg3);
 	add(saveBtn);
+	add(updateBtn);
+	add(deleteBtn);
 	
 	saveBtn.addActionListener((e)->{
 		String num1=inputMsg1.getText();
@@ -48,6 +53,36 @@ public class QuizMain3 extends JFrame {
 		dto.setAddr(addr);
 		
 		new MemberDao().insert(dto);
+	});
+	
+	updateBtn.addActionListener((e)->{
+		String num1=inputMsg1.getText();
+		String name=inputMsg2.getText();
+		String addr=inputMsg3.getText();
+		
+		int num=Integer.parseInt(num1);
+		
+		MemberDto dto=new MemberDto();
+		dto.setNum(num);
+		dto.setName(name);
+		dto.setAddr(addr);
+		
+		new MemberDao().update(dto);
+	});
+	
+	deleteBtn.addActionListener((e)->{
+		String num1=inputMsg1.getText();
+		String name=inputMsg2.getText();
+		String addr=inputMsg3.getText();
+		
+		int num=Integer.parseInt(num1);
+		
+		MemberDto dto=new MemberDto();
+		dto.setNum(num);
+		dto.setName(name);
+		dto.setAddr(addr);
+		
+		new MemberDao().delete(dto);
 	});
 	
 	setVisible(true);

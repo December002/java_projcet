@@ -1,4 +1,4 @@
-package test.dto;
+package test.memberDto;
 /*
  * 	Data Transfer Object
  * 	

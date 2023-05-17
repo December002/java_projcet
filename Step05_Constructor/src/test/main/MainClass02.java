@@ -11,8 +11,10 @@ public class MainClass02 {
 		mem1.name="김구라";
 		mem1.addr="노량진";
 		
+		mem1.printInfo();
 	
 		Member mem2 = new Member(2, "해골", "행신동");
-
+		
+		mem2.printInfo();
 	}
 }

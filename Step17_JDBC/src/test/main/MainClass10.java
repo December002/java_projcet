@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-import test.dto.MemberDto;
+import test.memberDto.MemberDto;
 import test.util.DBConnect;
 
 public class MainClass10 {

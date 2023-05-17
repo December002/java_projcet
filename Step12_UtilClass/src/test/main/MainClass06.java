@@ -20,7 +20,7 @@ import test.mypac.Car;
 public class MainClass06 {
 	public static void main(String[] args) {
 		HashMap<String, Object> map1=new HashMap<>();
-		//Key의 generic ↖  ↗ value 의 generic
+	//Key의 generic ↖    ↗ value 의 generic
 		//문자열을 키값으로 해서 원하는 어떤 type의 value 도 저장 할수 있다.
 		
 		map1.put("num", 1); //Integer 담기

@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import test.dao.MemberDao;
-import test.dto.MemberDto;
+import test.memberDao.MemberDao;
+import test.memberDto.MemberDto;
 
 public class QuizMain3 extends JFrame {
 	JTextField inputMsg1,inputMsg2,inputMsg3;
@@ -82,7 +82,7 @@ public class QuizMain3 extends JFrame {
 		dto.setName(name);
 		dto.setAddr(addr);
 		
-		new MemberDao().delete(dto);
+		new MemberDao().delete(num);
 	});
 	
 	setVisible(true);

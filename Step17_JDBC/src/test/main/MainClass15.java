@@ -1,7 +1,7 @@
 package test.main;
 
-import test.dao.MemberDao;
-import test.dto.MemberDto;
+import test.memberDao.MemberDao;
+import test.memberDto.MemberDto;
 
 public class MainClass15 {
 	public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class MainClass15 {
 		MemberDto dto=new MemberDto();
 		dto.setNum(num);
 		
-		boolean isDelete=new MemberDao().delete(dto);
+		boolean isDelete=new MemberDao().delete(num);
 		if(isDelete) {
 			System.out.println("삭제 했습니다");
 		}

@@ -15,6 +15,7 @@ public class MainClass06 {
 			String str=scan.nextLine();
 			//입력한 문자열을 배열의 i 번째 방에 대입
 			msgs[i]=str;
+			
 		}
 		//4. 반복문 돌면서 배열에 저장되었던 모든 문자열을 순서대로 콘솔창에 출력한다.
 		for(String tmp:msgs) {

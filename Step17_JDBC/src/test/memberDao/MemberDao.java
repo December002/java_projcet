@@ -1,4 +1,4 @@
-package test.dao;
+package test.memberDao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.dto.MemberDto;
+import test.memberDto.MemberDto;
 import test.util.DBConnect;
 
 /*
@@ -108,17 +108,15 @@ public class MemberDao {
                pstmt.close();
             if (conn != null)
                conn.close();
-         } catch (Exception e) {
-         }
+         } catch (Exception e) {}
       }
-      
       //회원 정보가 누적된 List 객체의 참조값을 리턴한다.
       return list;
    }
    
    
    //회원 한명의 정보를 삭제하는 메소드
-   public boolean delete(MemberDto dto) {
+   public boolean delete(int num) {
       //필요한 객체를 담을 지역 변수를 미리 만들기
       Connection conn = null;
       PreparedStatement pstmt = null;
@@ -133,7 +131,7 @@ public class MemberDao {
          //sql 문을 대신 실행해줄 PreparedStatement 객체의 참조값 얻어오기
          pstmt = conn.prepareStatement(sql);
          //sql 문이 ? 가 존재하는 미완성이라면 여기서 완성한다.
-         pstmt.setInt(1, dto.getNum());
+         pstmt.setInt(1, num);
          // insert or update or delete 문을 실제 수행한다. 변화된 row 의 갯수가 리턴된다.
          rowCount = pstmt.executeUpdate();//수행하고 리턴되는값을 변수에 담는다.
       } catch (Exception e) {
@@ -210,12 +208,13 @@ public class MemberDao {
          //실행할 sql 문
          String sql="INSERT INTO member"
                + " (num, name, addr)"
-               + " VALUES(member_seq.NEXTVAL, ?, ?)";
+               + " VALUES(member_seq.nextval, ?, ?)";
          //sql 문을 대신 실행해줄 PreparedStatement 객체의 참조값 얻어오기
          pstmt=conn.prepareStatement(sql);
          //sql 문이 ? 가 존재하는 미완성이라면 여기서 완성한다.
          pstmt.setString(1, dto.getName());
          pstmt.setString(2, dto.getAddr());
+         
          // insert or update or delete 문을 실제 수행한다. 변화된 row 의 갯수가 리턴된다.
          rowCount=pstmt.executeUpdate();//수행하고 리턴되는값을 변수에 담는다.
       }catch(Exception e) {

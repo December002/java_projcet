@@ -21,11 +21,13 @@ public class MainClass02 {
 		Phone p2=new HandPhone();
 		//HandPhone 객체를 생성해서 나온 참조값을 Object type 지역변수 p3 에 담기
 		Object p3=new HandPhone();
-		/*	 phone
+		/*	 
+		 * 	 object
+		 * 	   ↓
+		 * 	 phone
 		 * 	   ↓
 		 * 	HandPhone
 		 * 	   ↓
-		 *   Object
 		 */	 
 	}
 }

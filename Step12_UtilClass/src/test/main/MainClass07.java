@@ -53,5 +53,13 @@ public class MainClass07 {
 			String addr = (String)tmp.get("addr");
 			System.out.println("num:"+num+" name:"+name+" addr:"+addr);
 		}
+		for(int i=0; i<list.size(); i++) {
+			Map<String, Object> tmp=list.get(i);
+			int num=(int)tmp.get("num");
+			String name=(String)tmp.get("name");
+			String addr = (String)tmp.get("addr");
+			System.out.println("num:"+num+" name:"+name+" addr:"+addr);
+		}
+		
 	}
 }

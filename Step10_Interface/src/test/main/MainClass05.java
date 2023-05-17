@@ -17,12 +17,14 @@ public class MainClass05 {
 		Calc sub = (num1, num2)-> num1-num2;
 		Calc mul = (num1, num2)-> num1/num2;
 	
+		
 		double result1 = add.execcute(10, 20);
 		double result2 = sub.execcute(10, 20);
 		double result3 = mul.execcute(10, 20);
 		System.out.println(result1);
 		System.out.println(result2);
 		System.out.println(result3);
-		
+		double result4=add1.execcute(result2, result3);
+		System.out.println(result4);
 	}
 }

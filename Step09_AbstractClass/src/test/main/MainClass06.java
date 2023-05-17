@@ -15,8 +15,7 @@ public class MainClass06 {
 		};
 		//사용하기
 		useWeapon(w1);
-	
-		//메소드 호출할때 바로 익명클래스를 이용해서 Weapon type 의 참조값을 얻어내서 사용하기
+		//클래스를 이용해서 Weapon type 의 참조값을 얻어내서 사용하기
 		
 		useWeapon(new Weapon() {
 			@Override

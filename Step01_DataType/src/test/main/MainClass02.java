@@ -1,6 +1,6 @@
 package test.main;
 /*
- * 주석에 표기된거ㅏㅅ 대로 코딩을 완성해 보세요.
+ * 주석에 표기된것 대로 코딩을 완성해 보세요.
  */
 public class MainClass02 {
 	public static void main(String[] args) {

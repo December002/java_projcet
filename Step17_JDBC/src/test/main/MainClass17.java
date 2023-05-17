@@ -2,8 +2,8 @@ package test.main;
 
 import java.util.Scanner;
 
-import test.dao.MemberDao;
-import test.dto.MemberDto;
+import test.memberDao.MemberDao;
+import test.memberDto.MemberDto;
 
 public class MainClass17 {
 	public static void main(String[] args) {

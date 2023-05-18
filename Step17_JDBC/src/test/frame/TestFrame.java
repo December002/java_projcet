@@ -126,17 +126,21 @@ public class TestFrame extends JFrame implements ActionListener{
 			   JOptionPane.showMessageDialog(this, "삭제할 행을 선택하세요!");
 			   return;//메소드를 여기서 끝내라(리턴)   
 		   }
-		   //선택된 row 에 해당하는 회원번호(PK) 를 얻어낸다
-		   int num=(int)model.getValueAt(selectedRow, 0);
-		   //MemberDao 객체를 이용해서 회원 정보를 삭제한다.
-		   new MemberDao().delete(num);
-		   //JTable 을 refresh 한다.
-		   displayMember();
+		   int result=JOptionPane.showConfirmDialog(this, "정말로 삭제 하시겠습니까?");   
+		   //"예" 버튼을 눌렀을때만 실제 삭제하기
+		   if(result==JOptionPane.YES_OPTION) {
+			   //선택된 row 에 해당하는 회원번호(PK) 를 얻어낸다
+			   int num=(int)model.getValueAt(selectedRow, 0);
+			   //MemberDao 객체를 이용해서 회원 정보를 삭제한다.
+			   new MemberDao().delete(num);
+			   //JTable 을 refresh 한다.
+			   displayMember();
+		   }
 	   }
 	}
    //TestFrame 에 메소드 추가
    public void displayMember() {
-	 //기존에 출력된 내용을 모두 삭제후 다시출력
+	 //기존에 출력된 내용을 모두 삭제후 다시ㅑ랴	력
 	   model.setRowCount(0);
 	   List<MemberDto> list=new MemberDao().getList();
 	   //반복문 돌면서

@@ -76,7 +76,7 @@ public class MyFrame extends JFrame implements ActionListener{
 	
 	
 	public static void main(String[] args) {
-		MyFrame f=new MyFrame("친구목록");
+		MyFrame f=new MyFrame("친구목록");	
 		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		f.setBounds(100, 100, 800, 500);
 		f.setVisible(true);

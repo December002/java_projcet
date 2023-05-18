@@ -23,6 +23,7 @@ public class TestFrame extends JFrame implements ActionListener{
 	//필요한 필드 정의하기
 	JTextField inputName, inputAddr;
 	DefaultTableModel model;
+	JTable table;
    //생성자
    public TestFrame(String title) {
       super(title);
@@ -41,6 +42,10 @@ public class TestFrame extends JFrame implements ActionListener{
        addBtn.setActionCommand("add");
        addBtn.addActionListener(this);
        
+       JButton deleteBtn=new JButton("삭제");
+       deleteBtn.setActionCommand("delete");
+       deleteBtn.addActionListener(this);
+       
        //페널에 UI 를 배치하고    
        JPanel panel=new JPanel();
        panel.add(label1);
@@ -48,15 +53,15 @@ public class TestFrame extends JFrame implements ActionListener{
        panel.add(label2);
        panel.add(inputAddr);
        panel.add(addBtn);
-       
+       panel.add(deleteBtn);
        
        //페널째로 프레임의 북쪽에 배치 
        add(panel, BorderLayout.NORTH);    
        
        panel.setBackground(Color.yellow);
        
-       
-       JTable table=new JTable();
+       //JTable
+       table=new JTable();
        
        String[] colNames= {"번호", "이름", "주소"};
        //테이블에 연결할 모델객체 생성 (테이블에 출력할 데이터를 여기에 추가하면 테이블에 출력된다)
@@ -83,15 +88,8 @@ public class TestFrame extends JFrame implements ActionListener{
 //       this.setVisible(true);
        
        
-    	   //회원 목록 가져오기
-    	   List<MemberDto> list=new MemberDao().getList();
-    	   //반복문 돌면서
-    	   for(MemberDto tmp:list) {
-    		   //MemberDto 객체 하나당 Object[] 을 하나씩 만들어내서
-    		   Object[] row= {tmp.getNum(), tmp.getName(), tmp.getAddr()};
-    		   // 모델에 추가하기
-    		   model.addRow(row); 
-    	   } 
+    	//회원정보 출력하기
+       	displayMember();
    }
    
    //run 했을때 실행의 흐름이 시작되는 main 메소드
@@ -120,17 +118,33 @@ public class TestFrame extends JFrame implements ActionListener{
 		   if(isSuccess) {
 			   JOptionPane.showMessageDialog(this, "저장했습니다");
 			 //5. JTable에 회원목록이 다시 출력되도록 한다.
-			   //기존에 출력된 내용을 모두 삭제후 다시출력
-			   model.setRowCount(0);
-			   List<MemberDto> list=new MemberDao().getList();
-	    	   //반복문 돌면서
-	    	   for(MemberDto tmp:list) {
-	    		   //MemberDto 객체 하나당 Object[] 을 하나씩 만들어내서
-	    		   Object[] row= {tmp.getNum(), tmp.getName(), tmp.getAddr()};
-	    		   // 모델에 추가하기
-	    		   model.addRow(row); 
-	    	   }
+			   displayMember();
 		   }
-	   	}
+	   }else if(cmd.equals("delete")) {
+		   int selectedRow = table.getSelectedRow(); 
+		   if(selectedRow == -1) {//만일 선택된 row 가 없다면
+			   JOptionPane.showMessageDialog(this, "삭제할 행을 선택하세요!");
+			   return;//메소드를 여기서 끝내라(리턴)   
+		   }
+		   //선택된 row 에 해당하는 회원번호(PK) 를 얻어낸다
+		   int num=(int)model.getValueAt(selectedRow, 0);
+		   //MemberDao 객체를 이용해서 회원 정보를 삭제한다.
+		   new MemberDao().delete(num);
+		   //JTable 을 refresh 한다.
+		   displayMember();
+	   }
 	}
+   //TestFrame 에 메소드 추가
+   public void displayMember() {
+	 //기존에 출력된 내용을 모두 삭제후 다시출력
+	   model.setRowCount(0);
+	   List<MemberDto> list=new MemberDao().getList();
+	   //반복문 돌면서
+	   for(MemberDto tmp:list) {
+		   //MemberDto 객체 하나당 Object[] 을 하나씩 만들어내서
+		   Object[] row= {tmp.getNum(), tmp.getName(), tmp.getAddr()};
+		   // 모델에 추가하기
+		   model.addRow(row); 
+	   }
+   }
 }

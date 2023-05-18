@@ -26,10 +26,13 @@ public class TestFrame2  extends JFrame implements ActionListener{
 	JTextField inputName, inputAddr;
 	DefaultTableModel model;
 	
+	
 	public TestFrame2(String title) {
 		super(title);
-		
 		setLayout(new BorderLayout());
+		
+		JLabel label3=new JLabel("번호");
+		JTextField inputNum=new JTextField(10);
 		
 		JLabel label1=new JLabel("이름");
 		inputName=new JTextField(10);
@@ -41,11 +44,17 @@ public class TestFrame2  extends JFrame implements ActionListener{
 		addBtn.addActionListener(this);
 		addBtn.setActionCommand("add");
 		
+		JButton delBtn=new JButton("삭제");
+		
 		JPanel panel=new JPanel();
+		panel.add(label3);
+		panel.add(inputNum);
 		panel.add(label1);
 		panel.add(inputName);
 		panel.add(label2);
 		panel.add(inputAddr);
+		panel.add(addBtn);
+		panel.add(delBtn);
 		
 		add(panel, BorderLayout.NORTH);
 		panel.setBackground(Color.yellow);
@@ -67,11 +76,26 @@ public class TestFrame2  extends JFrame implements ActionListener{
 //		model.addRow(row2);
 //		model.addRow(row3);
 		
-		List<MemberDto> list=new ArrayList<>();
+		List<MemberDto> list=new MemberDao().getList();
 		for(MemberDto tmp:list) {
 			Object[] row= {tmp.getNum(), tmp.getName(), tmp.getAddr()};
 			model.addRow(row);
 		}
+		
+		delBtn.addActionListener((e)->{
+			int num=Integer.parseInt(inputNum.getText());
+			MemberDto dto=new MemberDto();
+			dto.setNum(num);
+			boolean isSuccess=new MemberDao().delete(num);
+			if(isSuccess) {
+				JOptionPane.showMessageDialog(this, "삭제했습니다.");
+				List<MemberDto> list2=new ArrayList<>();
+				for(MemberDto tmp:list2) {
+					Object[] row= {tmp.getNum(), tmp.getName(), tmp.getAddr()};
+					model.addRow(row);
+				}
+			}
+		});	
 	}
 	
 	public static void main(String[] args) {
